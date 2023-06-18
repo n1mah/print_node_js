@@ -52,42 +52,33 @@ const isObject = (data) => {
     return typeof data === 'object';
 };
 
-const outputEr=(data)=>{
-    checker(data);
-}
-const checker = (data)=>{
-    if (isObject(data)){
-        Paymaesh(data);
+// const outputEr=(data)=>{
+//     checker(data);
+// }
+
+
+const checker = (data,key)=>{
+    if (isObject(data[key])){
+        Paymaesh(data,key);
     }else {
-        if (data!=null) //not
-            console.log(data)
+        if (data[key]!=null) //not
+            console.log(data[key])
     }
 }
-const Paymaesh = (data)=>{
-    // console.log(data)
-    // for (const key in data){
-    //     console.log(data[key])
-    // }
-    if (data!=null)
-        console.log(Object.keys(data))
-    for (const key in data){
-        checker(data[key])
+const Paymaesh = (data,key)=>{
+    if (data[key]!=null)
+        // console.log(Object.keys(data))
+        console.log(key)
+    for (const key_sec in data[key]){
+        checker(data[key],key_sec)
     }
 };
 
-// const  runner=(data)=>{
-//     while ()
-// };
 
 // Test 2 Level Show Node Manual
-for (const key in node) {
-    console.log(key)
-    checker(node[key])
-    // if (isObject(node[key])){
-    //     Paymaesh(node[key]);
-    // }else {
-    //     console.log(key)
-    // }
-//     if ()
-//     console.log(`${key}: ${node[key]}`);
+const Runner= () => {
+    for (const key in node) {
+        checker(node,key)
+    }
 }
+Runner();
