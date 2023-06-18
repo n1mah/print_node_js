@@ -57,28 +57,31 @@ const isObject = (data) => {
 // }
 
 
-const checker = (data,key)=>{
+const checker = (data,key,k)=>{
     if (isObject(data[key])){
-        Paymaesh(data,key);
+        Paymaesh(data,key,k);
     }else {
-        if (data[key]==null) //not
+        if (data[key]==null)
             console.log(key)
     }
 }
-const Paymaesh = (data,key)=>{
+const Paymaesh = (data,key,k)=>{
     if (data[key]!=null)
         // console.log(Object.keys(data))
-        console.log(key)
+        console.log(key,k) //
+
     for (const key_sec in data[key]){
-        checker(data[key],key_sec)
+        checker(data[key],key_sec,key)
     }
 };
+
+let c=0;
 
 
 // Test 2 Level Show Node Manual
 const Runner= () => {
     for (const key in node) {
-        checker(node,key)
+        checker(node,key,"")
     }
 }
 Runner();
