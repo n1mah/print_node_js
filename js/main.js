@@ -62,7 +62,7 @@ const checker = (data,key,k)=>{
         Paymaesh(data,key,k);
     }else {
         if (data[key]==null)
-            console.log(key)
+            console.log(key,k)
     }
 }
 const Paymaesh = (data,key,k)=>{
@@ -85,3 +85,5 @@ const Runner= () => {
     }
 }
 Runner();
+
+
