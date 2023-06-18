@@ -1,70 +1,33 @@
-// alert('test')
-class Node {
-    constructor (data) {
-        this.data = data;
-        this.left = null;
-        this.right = null;
+
+    class Node
+    {
+        constructor(data)
+    {
+        this.left=this.right=null;
+        this.data=data;
     }
-}
-
-
-class BST {
-    constructor(){
-        this.root = null
     }
-    insert(data){
-        var newNode = new Node(data);
-        if (this.root == null)
-            this.root = newNode;
-        else {
-            this.insertNode(this.root, newNode);
-        }
+
+    function findFullNode(root)
+    {
+        if (root != null)
+    {
+        findFullNode(root.left);
+        if (root.left != null && root.right != null)
+        document.write(root.data+" ");
+        findFullNode(root.right);
     }
-    insertNode(node, newNode){
-        if (newNode.data < node.data)
-        {
-            if (node.left == null)
-                node.left = newNode;
-            else
-            {
-                node = node.left;
-                this.insertNode(node, newNode);
-            }
-
-        }
-        else if (newNode.data > node.data)
-        {
-            if (node.right == null)
-                node.right = newNode;
-            else
-            {
-                node = node.right;
-                this.insertNode(node, newNode);
-            }
-        }
     }
-    insertArray(arr) {
 
-        for (let i = 0; i < arr.length; i++)
-            this.insert(arr[i]);
+    let root = new Node(1);
+    root.left = new Node(2);
+    root.right = new Node(3);
+    root.left.left = new Node(4);
+    root.right.left = new Node(5);
+    root.right.right = new Node(6);
+    root.right.left.right = new Node(7);
+    root.right.right.right = new Node(8);
+    root.right.left.right.left = new Node(9);
+    findFullNode(root);
 
-    }
-    printPostOrder(node){
 
-        if (node)
-        {
-            if (node.root){
-                    this.printPostOrder(node.root.left);
-                    this.printPostOrder(node.root.right)
-                    console.log(node.root);
-            }
-
-        }
-    }
-}
-
-var tree = new BST();
-
-tree.insertArray([1, 3, 6, 7, -3, 13, 9, -2, 4, 8, 1, -4, -8]);
-// console.log(tree);
-tree.printPostOrder(tree);
