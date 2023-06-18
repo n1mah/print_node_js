@@ -21,9 +21,15 @@ let node = {
                P:null,
            },
            H:{
-               Q:null,
+               Q: {
+                   S:{
+                       T:null
+                   }
+               },
            },
-           I:null,
+           I:{
+               Z:null
+           },
        },
     },
 };
@@ -34,18 +40,54 @@ let node = {
 //     console.log(value);
 // });
 
+const getD = (data) =>{
+    if (isObject(data)){
+
+    }
+}
+const isObject = (data) => {
+    if (data === null) {
+        return false;
+    }
+    return typeof data === 'object';
+};
+
+const outputEr=(data)=>{
+    checker(data);
+}
+const checker = (data)=>{
+    if (isObject(data)){
+        Paymaesh(data);
+    }else {
+        if (data!=null) //not
+            console.log(data)
+    }
+}
+const Paymaesh = (data)=>{
+    // console.log(data)
+    // for (const key in data){
+    //     console.log(data[key])
+    // }
+    if (data!=null)
+        console.log(Object.keys(data))
+    for (const key in data){
+        checker(data[key])
+    }
+};
+
+// const  runner=(data)=>{
+//     while ()
+// };
 
 // Test 2 Level Show Node Manual
 for (const key in node) {
     console.log(key)
-    if (node[key]){
-        console.log(node[key])
-        for (const key2 in node[key]){
-            console.log(node[key][key2])
-        }
-    }else {
-        console.log(key)
-    }
+    checker(node[key])
+    // if (isObject(node[key])){
+    //     Paymaesh(node[key]);
+    // }else {
+    //     console.log(key)
+    // }
 //     if ()
 //     console.log(`${key}: ${node[key]}`);
 }
