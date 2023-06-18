@@ -64,6 +64,7 @@ const checker = (data,key,k)=>{
         if (data[key]==null){
             console.log(key,k)
             insert1DArray(key,k)
+            insert1DArray2(key,k)
             insert1DObject(key,k)
         }
     }
@@ -72,6 +73,7 @@ const checker = (data,key,k)=>{
     if (data[key]!=null){
         console.log(key,k)
         insert1DArray(key,k)
+        insert1DArray2(key,k)
         insert1DObject(key,k)
     }
     for (const key_sec in data[key]){
@@ -80,9 +82,17 @@ const checker = (data,key,k)=>{
 };
 
 let arr=[];
+let arr2=[];
 let obj=[];
 const insert1DArray=(node,parent)=>{
     arr.push([node,parent]);
+};
+const insert1DArray2=(node,parent)=>{
+    let data={
+        'parent':parent,
+        'value':node
+    }
+    arr2.push(data);
 };
 const insert1DObject=(node,parent)=>{
     let data={
@@ -106,6 +116,51 @@ const Runner= () => {
 }
 Runner();
 
-// const result=node.group(({ type }) => type);
+// const result=Array.prototype.group.call(obj,(x)=>{
+//     console.log(x)});
 // console.log(result);
+// const groupBy = (items, key) => items.reduce(
+//     (result, item) => ({
+//         ...result,
+//         [item[key]]: [
+//             ...(result[item[key]] || []),
+//             item,
+//         ],
+//     }),
+//     {},
+// );
 
+// let r=arr.reduce((group, obj) => {
+//     console.log("--")
+//     console.log(obj)
+    // return obj
+// });
+// console.log(r)
+// groupBy(obj,'A')
+
+// const groupByCategory = obj.reduce((group, product) => {
+//     const { category } = product;
+//     group[category] = group[category] ?? [];
+//     group[category].push(product);
+//     return group;
+// }, {});
+//
+// console.log(groupByCategory);
+
+
+
+const groupArrayObject = arr2.reduce((group, arr) => {
+
+        const { parent } = arr;
+
+        group[parent] = group[parent] ?? [];
+
+        group[parent].push(arr);
+
+        return group;
+
+    },
+
+    {});
+
+console.log(groupArrayObject);
