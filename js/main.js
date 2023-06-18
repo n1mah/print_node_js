@@ -61,8 +61,8 @@ const checker = (data,key)=>{
     if (isObject(data[key])){
         Paymaesh(data,key);
     }else {
-        if (data[key]!=null) //not
-            console.log(data[key])
+        if (data[key]==null) //not
+            console.log(key)
     }
 }
 const Paymaesh = (data,key)=>{
