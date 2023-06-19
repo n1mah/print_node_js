@@ -192,20 +192,25 @@ const showChildNode=(...node)=>{
     let str="";
     let children=[];
     for (let j=0;j<node.length;j++) {
-        for (let i = 0; i < node[j].length; i++) {
-            str+=(node[j][i].value);
-            children.push(node[j][i].value)
-            str+=(i!==node[j].length-1)?"    |    ":" ";
+        // console.log(node[j]);
+        if (node[j]===false){
+
+        }else {
+            for (let i = 0; i < node[j].length; i++) {
+                str+=(node[j][i].value);
+                children.push(node[j][i].value)
+                str+=(i!==node[j].length-1)?"    |    ":" ";
+            }
+            str+=(j!==node.length-1)?"    |||    ":" ";
         }
-        str+=(j!==node.length-1)?"    |||    ":" ";
     }
     console.log(str)
-    console.log(children)
+    // console.log(children)
         for (let i = 0; i < children.length; i++) {
             children[i]=searchNodeWithParent(children[i]);
         }
         showChildNode(...children)
-    console.log('--')
+    // console.log('--')
     }
 
 }
