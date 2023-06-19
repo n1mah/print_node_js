@@ -181,23 +181,40 @@ const logOrderNode=()=>{
 console.log('---------')
 
 const searchNodeWithParent=(parent)=>{
-    return (groupArrayObject[parent])
+    return (groupArrayObject[parent]!==undefined)?groupArrayObject[parent]:false;
+    // return (groupArrayObject[parent])
 }
 const showChildNode=(...node)=>{
+    if (node.length===1 && node[0]===false){
+
+    }else {
+
     let str="";
+    let children=[];
     for (let j=0;j<node.length;j++) {
         for (let i = 0; i < node[j].length; i++) {
             str+=(node[j][i].value);
+            children.push(node[j][i].value)
             str+=(i!==node[j].length-1)?"    |    ":" ";
         }
         str+=(j!==node.length-1)?"    |||    ":" ";
     }
     console.log(str)
+    console.log(children)
+        for (let i = 0; i < children.length; i++) {
+            children[i]=searchNodeWithParent(children[i]);
+        }
+        showChildNode(...children)
     console.log('--')
+    }
+
 }
+// showChildNode(searchNodeWithParent(""))
 showChildNode(searchNodeWithParent(""))
-showChildNode(searchNodeWithParent("A"))
-showChildNode(searchNodeWithParent("B"),searchNodeWithParent("C"))
-showChildNode(searchNodeWithParent("D"),searchNodeWithParent("E"),searchNodeWithParent("F"),searchNodeWithParent("G"),searchNodeWithParent("H"),searchNodeWithParent("I"))
+// showChildNode(searchNodeWithParent("J"))
+// console.log(searchNodeWithParent("R"))
+// showChildNode(searchNodeWithParent("R"))
+// showChildNode(searchNodeWithParent("B"),searchNodeWithParent("C"))
+// showChildNode(searchNodeWithParent("D"),searchNodeWithParent("E"),searchNodeWithParent("F"),searchNodeWithParent("G"),searchNodeWithParent("H"),searchNodeWithParent("I"))
 
 
