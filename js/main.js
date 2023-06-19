@@ -198,7 +198,7 @@ const showChildNode=(...node)=>{
         }else {
             for (let i = 0; i < node[j].length; i++) {
                 str+=(node[j][i].value);
-                children.push(node[j][i].value)
+                children.push([node[j][i].value,node[j][i].value])
                 str+=(i!==node[j].length-1)?"    |    ":" ";
             }
             str+=(j!==node.length-1)?"    |||    ":" ";
@@ -206,10 +206,14 @@ const showChildNode=(...node)=>{
     }
     console.log(str)
     // console.log(children)
+        let values=[];
         for (let i = 0; i < children.length; i++) {
-            children[i]=searchNodeWithParent(children[i]);
+            // children[i]=searchNodeWithParent(children[i][0]);
+            values[i]=searchNodeWithParent(children[i][0]);
         }
-        showChildNode(...children)
+        // console.dir(values)
+        // console.dir(children)
+        showChildNode(...values)
     // console.log('--')
     }
 
