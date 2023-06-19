@@ -164,3 +164,26 @@ const groupArrayObject = arr2.reduce((group, arr) => {
     {});
 
 console.log(groupArrayObject);
+
+
+//Log Node child on parent
+const logOrderNode=()=>{
+    for (const groupArrayObjectKey in groupArrayObject) {
+        let str="";
+        for (let i = 0; i < groupArrayObject[groupArrayObjectKey].length; i++) {
+            str+=(groupArrayObject[groupArrayObjectKey][i].value);
+            str+=(i!==groupArrayObject[groupArrayObjectKey].length-1)?"    |    ":" ";
+        }
+        console.log(str)
+        console.log('--')
+    }
+}
+console.log('---------')
+
+const searchNodeWithParent=(parent)=>{
+    console.log(groupArrayObject[parent])
+}
+searchNodeWithParent("A")
+searchNodeWithParent("B")
+
+
