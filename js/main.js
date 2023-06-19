@@ -181,9 +181,9 @@ const logOrderNode=()=>{
 console.log('---------')
 
 const searchNodeWithParent=(parent)=>{
-    console.log(groupArrayObject[parent])
+    return (groupArrayObject[parent])
 }
-searchNodeWithParent("A")
-searchNodeWithParent("B")
+console.log(searchNodeWithParent("A"))
+console.log(searchNodeWithParent("B"),searchNodeWithParent("C"))
 
 
