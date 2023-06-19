@@ -190,12 +190,14 @@ const showChildNode=(...node)=>{
             str+=(node[j][i].value);
             str+=(i!==node[j].length-1)?"    |    ":" ";
         }
-        str+=(j!==node.length-1)?"    |    ":" ";
+        str+=(j!==node.length-1)?"    |||    ":" ";
     }
     console.log(str)
     console.log('--')
 }
+showChildNode(searchNodeWithParent(""))
 showChildNode(searchNodeWithParent("A"))
 showChildNode(searchNodeWithParent("B"),searchNodeWithParent("C"))
+showChildNode(searchNodeWithParent("D"),searchNodeWithParent("E"),searchNodeWithParent("F"),searchNodeWithParent("G"),searchNodeWithParent("H"),searchNodeWithParent("I"))
 
 
