@@ -183,7 +183,19 @@ console.log('---------')
 const searchNodeWithParent=(parent)=>{
     return (groupArrayObject[parent])
 }
-console.log(searchNodeWithParent("A"))
-console.log(searchNodeWithParent("B"),searchNodeWithParent("C"))
+const showChildNode=(...node)=>{
+    let str="";
+    for (let j=0;j<node.length;j++) {
+        for (let i = 0; i < node[j].length; i++) {
+            str+=(node[j][i].value);
+            str+=(i!==node[j].length-1)?"    |    ":" ";
+        }
+        str+=(j!==node.length-1)?"    |    ":" ";
+    }
+    console.log(str)
+    console.log('--')
+}
+showChildNode(searchNodeWithParent("A"))
+showChildNode(searchNodeWithParent("B"),searchNodeWithParent("C"))
 
 
