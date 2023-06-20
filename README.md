@@ -63,3 +63,7 @@ const data={
 }
 ```
 
+## :camera: Screenshot
+Screenshot on browser :
+
+![](Screenshot.png)
