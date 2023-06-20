@@ -59,7 +59,7 @@ const printTree = (node) => {
                 left
                     ? `
                 <div class="node left">
-<!--                <canvas class="canvas canvas-left"> </canvas>-->
+                <canvas class="canvas canvas-left"> </canvas>
                   ${printTree(left)}
                 </div>
                 `
@@ -69,7 +69,7 @@ const printTree = (node) => {
                 right
                     ? `
                 <div class="node right">
-<!--                <canvas class="canvas canvas-right"> </canvas>-->
+                <canvas class="canvas canvas-right"> </canvas>
                   ${printTree(right)}
                 </div>
                 `
@@ -95,13 +95,13 @@ main();
 
 
 
-console.log("A-"+document.querySelector("#A").getBoundingClientRect().left)
-console.log("B-"+document.querySelector("#B").getBoundingClientRect().left)
-console.log("C-"+document.querySelector("#C").getBoundingClientRect().left)
-console.log("D-"+document.querySelector("#D").getBoundingClientRect().left)
-console.log("E-"+document.querySelector("#E").getBoundingClientRect().left)
-console.log("F-"+document.querySelector("#F").getBoundingClientRect().left)
-console.log("G-"+document.querySelector("#G").getBoundingClientRect().left)
+// console.log("A-"+document.querySelector("#A").getBoundingClientRect().left)
+// console.log("B-"+document.querySelector("#B").getBoundingClientRect().left)
+// console.log("C-"+document.querySelector("#C").getBoundingClientRect().left)
+// console.log("D-"+document.querySelector("#D").getBoundingClientRect().left)
+// console.log("E-"+document.querySelector("#E").getBoundingClientRect().left)
+// console.log("F-"+document.querySelector("#F").getBoundingClientRect().left)
+// console.log("G-"+document.querySelector("#G").getBoundingClientRect().left)
 document.querySelectorAll(".canvas-right").forEach(value => {
     ctx = value.getContext('2d');
     drawLine(ctx, 0, 0, 30, 30, 'blue', 3);
@@ -115,3 +115,15 @@ document.querySelectorAll(".canvas-left").forEach(value => {
 // let canvas = document.querySelector('.canvas'),
 //     ctx = canvas.getContext('2d');
 // drawLine(ctx, 0, 0, 30, 30, 'blue', 3);
+
+let positionMade=[];
+const ddd = (node,parent=null) => {
+    const { left, right, value } = node;
+    positionMade.push([value,document.querySelector("#"+value).getBoundingClientRect().left,document.querySelector("#"+value).getBoundingClientRect().top,parent]);
+    if (left!=null)
+        (ddd(left,value))
+    if (right!=null)
+        (ddd(right,value))
+    return positionMade;
+}
+console.log(ddd(data));
