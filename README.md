@@ -17,8 +17,15 @@ Add Div To Html Structure
 
 Add Script
 ```html
-<script src="js/script.js"></script>
+    <script src="js/script.js"></script>
 ```
+
+Add Style
+```html
+    <link rel="stylesheet" href="css/style.css">
+```
+
+
 
 ### JS 
 Add Data
@@ -67,3 +74,6 @@ const data={
 Screenshot on browser :
 
 ![](Screenshot.png)
+
+
+# Enjoy it ...
