@@ -1,228 +1,116 @@
-let node = {
-    A: {
-        B:{
-            D:{
-                J:{
-                    R:null
-                },
-                K:null
+const data={
+        value:"A",
+        left:{
+            value:"B",
+            left:{
+                value:"D",
+                right:null,
+                left:null,
             },
-            E:{
-                L:null,
-                M:null
-            },
-            F:{
-                N:null,
-                O:null
+            right:{
+                value:"E",
+                right:null,
+                left:null,
             },
         },
-        C:{
-            G:{
-                P:null,
+        right:{
+            value:"C",
+            left:{
+                value:"F",
+                right:null,
+                left:null,
             },
-            H:{
-                Q: {
-                    S:{
-                        T:null
-                    }
+            right:{
+                value:"G",
+                right:null,
+                left:{
+                    value:"H",
+                    right:{
+                        value:"I",
+                        right:null,
+                        left:null,
+                    },
+                    left:null,
                 },
             },
-            I:{
-                Z:null
-            },
         },
-    },
+}
+//Data
+
+const printTree = (node) => {
+    const { left, right, value } = node;
+    return `
+    <div class="element" id="${value}">${value}</div>
+    ${left || right ? `
+          <div class="children">
+            ${left ? `
+                <div class="node left">
+                  ${printTree(left)}
+                </div>
+                ` : ''}
+            ${right ? `
+                <div class="node right">
+                  ${printTree(right)}
+                </div>
+                ` : ''}
+          </div>
+        ` : ''}
+    `;
 };
 
-const creator=(data,have=null)=>{
-    // let root=document.querySelector("#root").innerHTML;
-
-    str=`<span>${data}</span>`;
-    have===null?str+="":str+="<br>";
-    document.querySelector("#root").innerHTML+=str;
+let positionMade=[];
+const drawLine = (node,parent=null,px=null,py=null) => {
+    const { left, right, value } = node;
+    positionMade.push([value,document.querySelector("#"+value).getBoundingClientRect().left,document.querySelector("#"+value).getBoundingClientRect().top,parent,px,py]);
+    if (left!=null)
+        (drawLine(left,value,document.querySelector("#"+value).getBoundingClientRect().left,document.querySelector("#"+value).getBoundingClientRect().top))
+    if (right!=null)
+        (drawLine(right,value,document.querySelector("#"+value).getBoundingClientRect().left,document.querySelector("#"+value).getBoundingClientRect().top))
+    return positionMade;
 }
 
-const isObject = (data) => {
-    if (data === null) {
-        return false;
-    }
-    return typeof data === 'object';
-};
-
-
-
-const checker = (data,key,k)=>{
-    if (isObject(data[key])){
-        iterate(data,key,k);
-    }else {
-        if (data[key]==null){
-            console.log(key,k)
-            insert1DArray(key,k)
-            insert1DArray2(key,k)
-            insert1DObject(key,k)
-        }
-    }
+const createLineElement=(x, y, length, angle) =>{
+    var line = document.createElement("div");
+    var styles = 'border: 1px solid black; '
+        + 'width: ' + length + 'px; '
+        + 'height: 0px; '
+        + '-moz-transform: rotate(' + angle + 'rad); '
+        + '-webkit-transform: rotate(' + angle + 'rad); '
+        + '-o-transform: rotate(' + angle + 'rad); '
+        + '-ms-transform: rotate(' + angle + 'rad); '
+        + 'position: absolute; '
+        + 'top: ' + y + 'px; '
+        + 'left: ' + x + 'px; ';
+    line.setAttribute('style', styles);
+    return line;
 }
-const iterate = (data,key,k)=>{
-    if (data[key]!=null){
-        console.log(key,k)
-        insert1DArray(key,k)
-        insert1DArray2(key,k)
-        insert1DObject(key,k)
-    }
-    for (const key_sec in data[key]){
-        checker(data[key],key_sec,key)
-    }
-};
 
-let arr=[];
-let arr2=[];
-let obj=[];
-const insert1DArray=(node,parent)=>{
-    arr.push([node,parent]);
-};
-const insert1DArray2=(node,parent)=>{
-    let data={
-        'parent':parent,
-        'value':node
-    }
-    arr2.push(data);
-};
-const insert1DObject=(node,parent)=>{
-    let data={
-        'parent':parent,
-        'value':node
-    }
-    obj={
-        ...obj,
-        [node]:data
-    }
-};
-
-
-// Test 2 Level Show Node Manual
-const Runner= () => {
-    for (const key in node) {
-        checker(node,key,"")
-    }
-    console.log(arr);
-    console.log(obj);
+const createLine=(x1, y1, x2, y2) =>{
+    let a = x1 - x2,
+        b = y1 - y2,
+        c = Math.sqrt(a * a + b * b);
+    let sx = (x1 + x2) / 2,
+        sy = (y1 + y2) / 2;
+    let x = sx - c / 2,
+        y = sy;
+    let alpha = Math.PI - Math.atan2(-b, a);
+    return createLineElement(x, y, c, alpha);
 }
-Runner();
 
-// const result=Array.prototype.group.call(obj,(x)=>{
-//     console.log(x)});
-// console.log(result);
-// const groupBy = (items, key) => items.reduce(
-//     (result, item) => ({
-//         ...result,
-//         [item[key]]: [
-//             ...(result[item[key]] || []),
-//             item,
-//         ],
-//     }),
-//     {},
-// );
+const run = () => {
+    // Draw Node
+    const root = document.querySelector('#root');
+    root.innerHTML = printTree(data);
 
-// let r=arr.reduce((group, obj) => {
-//     console.log("--")
-//     console.log(obj)
-// return obj
-// });
-// console.log(r)
-// groupBy(obj,'A')
+    // Draw Line
+    drawLine(data);
 
-// const groupByCategory = obj.reduce((group, product) => {
-//     const { category } = product;
-//     group[category] = group[category] ?? [];
-//     group[category].push(product);
-//     return group;
-// }, {});
-//
-// console.log(groupByCategory);
-
-
-
-const groupArrayObject = arr2.reduce((group, arr) => {
-
-        const { parent } = arr;
-
-        group[parent] = group[parent] ?? [];
-
-        group[parent].push(arr);
-
-        return group;
-
-    },
-
-    {});
-
-// console.log(groupArrayObject);
-
-
-//Log Node child on parent
-const logOrderNode=()=>{
-    for (const groupArrayObjectKey in groupArrayObject) {
-        let str="";
-        for (let i = 0; i < groupArrayObject[groupArrayObjectKey].length; i++) {
-            str+=(groupArrayObject[groupArrayObjectKey][i].value);
-            str+=(i!==groupArrayObject[groupArrayObjectKey].length-1)?"    |    ":" ";
-        }
-        console.log(str)
-        console.log('--')
-    }
+    // Append Line In Window
+    positionMade.forEach((value,index) => {
+        let width=25;
+        let height=25;
+        if (positionMade[index][3]!=null)
+            document.querySelector("#canvases").appendChild(createLine(positionMade[index][4]+width, positionMade[index][5]+height, positionMade[index][1]+width, positionMade[index][2]+height))
+    })
 }
-console.log('---------')
-
-const searchNodeWithParent=(parent)=>{
-    return (groupArrayObject[parent]!==undefined)?groupArrayObject[parent]:false;
-    // return (groupArrayObject[parent])
-}
-const showChildNode=(...node)=>{
-    if (node.length===1 && node[0]===false){
-
-    }else {
-
-        let str="";
-        let children=[];
-        let lastParent="";
-        for (let j=0;j<node.length;j++) {
-            // console.log(node[j]);
-            if (node[j]===false){
-
-            }else {
-                for (let i = 0; i < node[j].length; i++) {
-                    lastParent=node[j][i].parent;
-                    str+=(node[j][i].value);
-                    creator(node[j][i].value);
-                    children.push([node[j][i].value,node[j][i].value]);
-                    (i!==node[j].length-1)?creator("-"):"";
-
-
-                }
-
-                (j!==node.length)?creator("","br"):"";
-            }
-        }
-        console.log(str)
-        let values=[];
-        for (let i = 0; i < children.length; i++) {
-            // children[i]=searchNodeWithParent(children[i][0]);
-            values[i]=searchNodeWithParent(children[i][0]);
-        }
-        // console.dir(values)
-        // console.dir(children)
-        showChildNode(...values)
-        // console.log('--')
-    }
-
-}
-// showChildNode(searchNodeWithParent(""))
-showChildNode(searchNodeWithParent(""))
-// showChildNode(searchNodeWithParent("J"))
-// console.log(searchNodeWithParent("R"))
-// showChildNode(searchNodeWithParent("R"))
-// showChildNode(searchNodeWithParent("B"),searchNodeWithParent("C"))
-// showChildNode(searchNodeWithParent("D"),searchNodeWithParent("E"),searchNodeWithParent("F"),searchNodeWithParent("G"),searchNodeWithParent("H"),searchNodeWithParent("I"))
-
-
+run();
