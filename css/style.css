@@ -1,3 +1,9 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
 .node {
     display: flex;
     flex-direction: column;
@@ -6,13 +12,14 @@
     position: relative;
 }
 
-
 #root>.element{
     margin: auto;
+    z-index: 99;
+    position: relative;
 }
 .left,.right{
     /*position: relative;*/
-    background: black;
+    /*background: black;*/
 
 }
 .canvas{
@@ -33,9 +40,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 99;
 }
 .children {
-    background: red;
+    /*background: red;*/
     display: flex;
     padding: 20px 0;
 }
@@ -45,4 +53,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+#canvases{
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 9;
 }
