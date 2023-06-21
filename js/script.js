@@ -47,12 +47,12 @@ const printTree = (node) => {
                 <div class="node left">
                   ${printTree(left)}
                 </div>
-                ` : ''}
+                ` : `<div class="element op0" id=""></div>`}
             ${right ? `
                 <div class="node right">
                   ${printTree(right)}
                 </div>
-                ` : ''}
+                ` :  `<div class="element op0" id=""></div>`}
           </div>
         ` : ''}
     `;
