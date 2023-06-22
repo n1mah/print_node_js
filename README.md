@@ -73,9 +73,11 @@ const data={
 ## :camera: Screenshot
 Screenshot on browser :
 
-initial :
-![](Screenshot.png)
-Update :
+[//]: # (initial :)
+
+[//]: # (![]&#40;Screenshot.png&#41;)
+
+[//]: # (Update :)
 ![](Screenshot-update.png)
 
 
